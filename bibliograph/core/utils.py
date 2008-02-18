@@ -15,7 +15,7 @@ import string
 import re
 
 # My imports ;-)
-from bibliograph.core.enc import _utf8enc2latex_mapping
+from bibliograph.core.encodings import _utf8enc2latex_mapping
 
 ###############################################################################
 
