@@ -12,6 +12,21 @@ class IBibliographyExport(Interface):
         exportable bibliography elements.
     """
 
+    format = schema.Choice(
+        title=_('Export format'),
+        required=True,
+        default='bibtex',
+        # XXX make this dynamic using a factory utilizing 'enabled' &
+        # 'available' flags          
+        vocabulary=SimpleVocabulary.fromItems([
+            (_("Bibtex"), 'bibtex'),
+            (_("Endnote"), 'endnote'),
+            (_("RIS"), 'ris'),
+            (_("XML (MODS)"), 'xml'),
+            (_("PDF"), 'pdf'),
+        ])
+        )
+
 ###############################################################################
 
 class IBibrenderable(Interface):
@@ -86,10 +101,10 @@ class IBibrenderable(Interface):
         required=False,
         )
 
-    def Authors(*args, **kw):
+    def getAuthors(*args, **kw):
         """ Get a list-like object containing the authors.
             The object must know about rendering a formatted list
-            of authors by beeing called.
+            of authors by being called.
         """
 
     def getURL():

@@ -118,7 +118,7 @@ def AuthorURLs(entry):
     """a string with all the known author's URLs;
     helper method for bibtex output"""
     a_URLs = ''
-    for a in entry.Authors():
+    for a in entry.getAuthors():
         url = a.get('homepage', ' ')
         a_URLs += "%s and " % url
     return a_URLs[:-5]
