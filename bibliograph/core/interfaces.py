@@ -34,7 +34,13 @@ class IBibrenderable(Interface):
 
     title = schema.TextLine(
         title=_('Title'),
-        description=_('The title of the entry'),
+        description=_('The title of the document'),
+        required = True,
+        )
+
+    authors = schema.TextLine(
+        title=_('Authors'),
+        description=_('A formated string of the authors of the document'),
         required = True,
         )
 
@@ -76,6 +82,11 @@ class IBibrenderable(Interface):
         description=_('A short summary of the document'),
         required = True,
         )
+    
+    url = schema.TextLine(
+        title=_('URL of the publication'),
+        required=False,
+        )
 
     subject = schema.List(
         title=_('Subject'),
@@ -101,13 +112,16 @@ class IBibrenderable(Interface):
         required=False,
         )
 
+    field_values = schema.List(
+        title=_('Values of fields'),
+        value_type=schema.TextLine(),
+        required=False,
+        )
+
     def getAuthors(*args, **kw):
         """ Get a list-like object containing the authors.
             The object must know about rendering a formatted list
             of authors by being called.
         """
-
-    def getURL():
-        """ URL of publication """
 
 # EOF
