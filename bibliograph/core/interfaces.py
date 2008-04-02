@@ -80,7 +80,7 @@ class IBibrenderable(Interface):
     abstract = schema.Text(
         title=_('Abstract'),
         description=_('A short summary of the document'),
-        required = True,
+        required = False,
         )
     
     url = schema.TextLine(
