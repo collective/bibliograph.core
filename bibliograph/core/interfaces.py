@@ -108,13 +108,7 @@ class IBibrenderable(Interface):
 
     source_fields = schema.List(
         title=_('Source fields'),
-        value_type=schema.TextLine(),
-        required=False,
-        )
-
-    field_values = schema.List(
-        title=_('Values of fields'),
-        value_type=schema.TextLine(),
+        value_type=schema.Tuple(),
         required=False,
         )
 
