@@ -2,6 +2,8 @@ from zope.interface import Interface
 from zope import schema
 from zope.schema.vocabulary import SimpleVocabulary
 
+from bibliograph.core.encodings import _python_encodings
+
 # XXX as long as we don't have a propper translation messagefactory
 _ = unicode
 
@@ -27,9 +29,15 @@ class IBibliographyExport(Interface):
         ])
         )
 
+    output_encoding = schema.Choice(
+        title=_('Encoding of output'),
+        required=False,
+        vocabulary=SimpleVocabulary.fromValues(_python_encodings)
+        )
+
 ###############################################################################
 
-class IBibrenderable(Interface):
+class IBibliographicReference(Interface):
     """ An object is renderable as a bibliography """
 
     title = schema.TextLine(

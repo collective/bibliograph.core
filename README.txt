@@ -1,8 +1,9 @@
 .. contents::
 
-.. Note to recipe author!
-   ---------------------
-   Update the following URL to point to your code repository or remove
-   it if one is not available.
+.. bibliograph.core
+   ----------------
+   Core components of the bibliograph-project. Contains interfaces
+   and utility methods.
 
-Code repository: http://svn.somewhere.com/...
+Homepage: http://pypi.python.org/pypi/bibliograph.core
+Code repository: http://svn.plone.org/svn/collective/bibliograph.core/
