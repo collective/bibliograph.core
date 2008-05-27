@@ -126,4 +126,22 @@ class IBibliographicReference(Interface):
             of authors by being called.
         """
 
+###############################################################################
+
+class IBibContainerIterator(Interface):
+    """ Iterates over contained bibliographic objects.
+    """
+        
+    def __iter__():
+        """ Do the iteration """
+    
+    def prehook(entry):
+        """ Method called before accessing item
+            
+            Must! return modified entry, if method is present.
+        """
+
+    def posthook(entry):
+        """ Method called after accessing item """
+
 # EOF
