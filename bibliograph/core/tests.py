@@ -23,7 +23,7 @@ def test_suite():
             
         doctestunit.DocTestSuite(
             'bibliograph.core.utils',
-            optionflags=doctest.ELLIPSIS,
+            optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE,
             globs=dict(DummyEntry=DummyEntry))
         ])
 

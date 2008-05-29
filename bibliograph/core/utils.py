@@ -11,8 +11,10 @@ __docformat__ = 'reStructuredText'
 __author__  = 'Tom Gross <itconsense@gmail.com>'
 
 # Python imports
-import string
+import os
 import re
+import string
+import sys
 
 # My imports ;-)
 from bibliograph.core.encodings import _utf8enc2latex_mapping
@@ -201,5 +203,52 @@ def _convertToOutputEncoding(export_text,
     if input_encoding:
         return _encode(_decode(export_text, input_encoding), output_encoding)
     return _encode(_decode(export_text), output_encoding)
+
+###############################################################################
+
+class MissingBinary(Exception): pass
+_marker = object()
+
+def bin_search(binary, default=_marker):
+    """ Search the bin_search_path for a given binary
+
+        Returns its fullname or raises MissingBinary exception
+        
+        We assume we have a python(.exe) installed anywhere in
+        the path. This seems one of the safest test.
+        >>> from bibliograph.core.utils import bin_search
+        >>> bin_search('python') != ''
+        True
+        
+        >>> bin_search('a_completely_stupid_command')
+        Traceback (most recent call last):
+        ...
+        MissingBinary: Unable to find binary "a_completely_stupid_command" ... 
+        
+        
+        >>> bin_search('a_completely_stupid_command', '/bin/default')
+        '/bin/default'
+    """
+    mode   = os.R_OK | os.X_OK
+    envPath = os.environ['PATH']
+    bin_search_path = [path for path in envPath.split(os.pathsep)
+                       if os.path.isdir(path)]
+
+    if sys.platform == 'win32':
+        extensions = ('.exe', '.com', '.bat', )
+    else:
+        extensions = ()
+         
+    for path in bin_search_path:
+        for ext in ('', ) + extensions:
+            pathbin = os.path.join(path, binary) + ext
+            if os.access(pathbin, mode) == 1:
+                return pathbin
+
+    if default is _marker:
+        raise MissingBinary('Unable to find binary "%s" in %s w' % 
+                           (binary, os.pathsep.join(bin_search_path)))
+    else:
+        return default
 
 # EOF
