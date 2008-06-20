@@ -225,13 +225,36 @@ def bin_search(binary, default=_marker):
         ...
         MissingBinary: Unable to find binary "a_completely_stupid_command" ... 
         
-        
         >>> bin_search('a_completely_stupid_command', '/bin/default')
         '/bin/default'
+
+        Let's see if the additional path is searched.
+        First we create a temporary directory and add it to the
+        environment.
+        >>> import os, stat, tempfile
+        >>> dir = tempfile.mkdtemp()
+        >>> os.environ['BIBUTILS_PATH'] = dir
+
+        Now create a dummy executable we want to find.
+        >>> exe = os.path.join(dir, '_stub_testing_file')
+        >>> f = open(exe, 'w')
+        >>> f.write('foobar')
+        >>> f.close()
+        >>> os.chmod(exe, stat.S_IXUSR | stat.S_IRUSR)
+
+        Do the search and compare.
+        >>> bin_search('_stub_testing_file') == exe
+        True
+
+        Cleanup.
+        >>> os.unlink(exe)
+        >>> os.rmdir(dir)
     """
     mode   = os.R_OK | os.X_OK
     envPath = os.environ['PATH']
-    bin_search_path = [path for path in envPath.split(os.pathsep)
+    customPath = os.environ.get('BIBUTILS_PATH', '')
+    searchPath = os.pathsep.join([customPath, envPath])
+    bin_search_path = [path for path in searchPath.split(os.pathsep)
                        if os.path.isdir(path)]
 
     if sys.platform == 'win32':

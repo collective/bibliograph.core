@@ -26,3 +26,11 @@ containing single exportable IBibliographicReference objects.
   
 Another part of the package are utility methods and a collection of encodings
 used within python and latex including a mapping.
+
+A utility method `bin_search` is included. It acts like the `which`-command on
+posix systems. It returns the full path of an executeable command, if it is
+found in the PATH environment variable.
+
+You may overload the PATH environment variable with another environment
+variable: BIBUTILS_PATH. Executeables in this location will be found as well.
+
