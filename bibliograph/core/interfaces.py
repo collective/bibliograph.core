@@ -18,15 +18,7 @@ class IBibliographyExport(Interface):
         title=_('Export format'),
         required=True,
         default='bibtex',
-        # XXX make this dynamic using a factory utilizing 'enabled' &
-        # 'available' flags          
-        vocabulary=SimpleVocabulary.fromItems([
-            (_("Bibtex"), 'bibtex'),
-            (_("Endnote"), 'endnote'),
-            (_("RIS"), 'ris'),
-            (_("XML (MODS)"), 'xml'),
-            (_("PDF"), 'pdf'),
-        ])
+        vocabulary="bibliography.formats",
         )
 
     output_encoding = schema.Choice(

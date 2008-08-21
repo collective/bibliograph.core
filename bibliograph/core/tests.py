@@ -2,6 +2,12 @@ import unittest, doctest
 
 from zope.testing import doctestunit
 from zope.component import testing
+from zope.component import provideUtility
+from zope.component import getUtility
+
+from zope.app.schema.vocabulary import IVocabularyFactory
+
+from bibliograph.core.vocabulary import BibFormatVocabularyFactory
 
 class DummyEntry(object):
 
@@ -10,6 +16,18 @@ class DummyEntry(object):
 
     def getId(self):
         return self.id
+
+class VocabularyTestCase(unittest.TestCase):
+    
+    def setUp(self):
+        provideUtility(BibFormatVocabularyFactory,
+                       IVocabularyFactory,
+                       u'bibliography.formats')
+
+    def test_formatsvoc(self):
+        voc = getUtility(IVocabularyFactory, u'bibliography.formats')(object())
+        assert 'bibtex' in voc
+
 
 def test_suite():
     return unittest.TestSuite([
@@ -24,7 +42,9 @@ def test_suite():
         doctestunit.DocTestSuite(
             'bibliograph.core.utils',
             optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE,
-            globs=dict(DummyEntry=DummyEntry))
+            globs=dict(DummyEntry=DummyEntry)),
+        
+        unittest.makeSuite(VocabularyTestCase),
         ])
 
 if __name__ == '__main__':
