@@ -1,4 +1,5 @@
 from zope.interface import Interface
+from zope.interface.common.mapping import IMapping
 from zope import schema
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -82,7 +83,7 @@ class IBibliographicReference(Interface):
         description=_('A short summary of the document'),
         required = False,
         )
-    
+
     url = schema.TextLine(
         title=_('URL of the publication'),
         required=False,
@@ -118,22 +119,43 @@ class IBibliographicReference(Interface):
             of authors by being called.
         """
 
+
+class IAuthor(Interface):
+    """Represents the author of an IBibliographicReference.
+    """
+
+    title = schema.TextLine(
+        title=_('Title'),
+        description=_('Title of the author.'),
+        required=False,
+        )
+
+    firstname = schema.TextLine(
+        title=_('First name'),
+        description=_('The first name(s) of the author.'),
+        required=False,
+        )
+
+    middlename = schema.TextLine(
+        title=_('Middle name'),
+        description=_('The middle name(s) of the author.'),
+        required=False,
+        )
+
+    lastname = schema.TextLine(
+        title=_('Last name'),
+        description=_('The last name(s) of the author.'),
+        required=False,
+        )
+
+
 ###############################################################################
 
-class IBibContainerIterator(Interface):
-    """ Iterates over contained bibliographic objects.
-    """
-        
-    def __iter__():
-        """ Do the iteration """
-    
-    def prehook(entry):
-        """ Method called before accessing item
-            
-            Must! return modified entry, if method is present.
-        """
 
-    def posthook(entry):
-        """ Method called after accessing item """
+class IBibliography(IMapping):
+    """An interface for objects containing IBibliographicReference objects.
+    """
+
+
 
 # EOF
