@@ -1,5 +1,5 @@
 from zope.interface import Interface
-from zope.interface.common.mapping import IMapping
+from zope.interface.common.mapping import IIterableMapping
 from zope import schema
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -152,7 +152,7 @@ class IAuthor(Interface):
 ###############################################################################
 
 
-class IBibliography(IMapping):
+class IBibliography(IIterableMapping):
     """An interface for objects containing IBibliographicReference objects.
     """
 
