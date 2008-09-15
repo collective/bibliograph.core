@@ -148,6 +148,23 @@ class IAuthor(Interface):
         required=False,
         )
 
+    prefix = schema.TextLine(
+        title=_('Prefix'),
+        description=_("Any prefix for the author's name."),
+        required=False,
+        )
+
+    suffix = schema.TextLine(
+        title=_('Suffix'),
+        description=_("Any suffix for the author's name."),
+        required=False,
+        )
+
+    isEditor = schema.Bool(
+        title=_('Is editor?'),
+        description=_('Indicates whether the author is an editor.'),
+        required=False,
+        )
 
 ###############################################################################
 
