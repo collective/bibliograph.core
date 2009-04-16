@@ -4,7 +4,7 @@
 ###############################################################################
 """ Collection of python utility-methodes commonly used by other
     bibliograph packages.
-    
+
 $Id$
 """
 __docformat__ = 'reStructuredText'
@@ -30,57 +30,63 @@ _entity_mapping = {'&mdash;':'{---}',
 # a poor-mans approach to fixing unicode issues :-(
 
 def _encode(s, encoding=_default_encoding):
-    ur""" Try to encode a string 
-    
+    ur""" Try to encode a string
+
         >>> from bibliograph.core.utils import _encode
-        
+
         ASCII is ASCII is ASCII ...
         >>> _encode(u'ascii', 'utf-8')
         'ascii'
-        
+
         This is normal
         >>> _encode(u'öl', 'utf-8')
         '\xc3\xb6l'
-        
+
         Don't fail on this ...
         >>> _encode('öl', 'utf-8')
         '\xc3\xb6l'
-        
-        Still throw an exception on unknown encodings        
+
+        Don't fail on this also
+        >>> _encode(None, 'utf-8')
+        ''
+
+        Still throw an exception on unknown encodings
         >>> _encode(u'öl', 'bogus')
         Traceback (most recent call last):
         ...
         LookupError: unknown encoding: bogus
-        
+
     """
+    if not s:
+        return ''
     try:
         return s.encode(encoding)
     except (TypeError, UnicodeDecodeError, ValueError):
         return s
 
 def _decode(s, encoding=_default_encoding):
-    ur""" Try to decode a string 
+    ur""" Try to decode a string
 
         >>> from bibliograph.core.utils import _decode
-        
+
         ASCII is ASCII is ASCII ...
         >>> _decode('ascii', 'utf-8')
         u'ascii'
-        
+
         This is normal
         >>> _decode('öl', 'utf-8')
         u'\xf6l'
-        
+
         Don't fail on this ...
         >>> _decode(u'öl', 'utf-8')
         u'\xf6l'
-        
-        Still throw an exception on unknown encodings        
+
+        Still throw an exception on unknown encodings
         >>> _decode('öl', 'bogus')
         Traceback (most recent call last):
         ...
         LookupError: unknown encoding: bogus
-        
+
     """
     try:
         return unicode(s, encoding)
@@ -104,7 +110,6 @@ def _validKey(entry):
     'myid'
 
     """
-
     # be forward compatible to zope3 contained objects
     raw_id = getattr(entry, '__name__', '')
     if not raw_id:
@@ -129,11 +134,11 @@ def AuthorURLs(entry):
 
 def _braceUppercase(text):
     """ Convert uppercase letters to bibtex encoded uppercase
-    
+
         >>> from bibliograph.core.utils import _braceUppercase
         >>> _braceUppercase('foo bar')
         'foo bar'
-        
+
         >>> _braceUppercase('Foo Bar')
         '{F}oo {B}ar'
     """
@@ -213,18 +218,18 @@ def bin_search(binary, default=_marker):
     """ Search the bin_search_path for a given binary
 
         Returns its fullname or raises MissingBinary exception
-        
+
         We assume we have a python(.exe) installed anywhere in
         the path. This seems one of the safest test.
         >>> from bibliograph.core.utils import bin_search
         >>> bin_search('python') != ''
         True
-        
+
         >>> bin_search('a_completely_stupid_command')
         Traceback (most recent call last):
         ...
-        MissingBinary: Unable to find binary "a_completely_stupid_command" ... 
-        
+        MissingBinary: Unable to find binary "a_completely_stupid_command" ...
+
         >>> bin_search('a_completely_stupid_command', '/bin/default')
         '/bin/default'
 
@@ -261,7 +266,7 @@ def bin_search(binary, default=_marker):
         extensions = ('.exe', '.com', '.bat', )
     else:
         extensions = ()
-         
+
     for path in bin_search_path:
         for ext in ('', ) + extensions:
             pathbin = os.path.join(path, binary) + ext
@@ -269,7 +274,7 @@ def bin_search(binary, default=_marker):
                 return pathbin
 
     if default is _marker:
-        raise MissingBinary('Unable to find binary "%s" in %s w' % 
+        raise MissingBinary('Unable to find binary "%s" in %s w' %
                            (binary, os.pathsep.join(bin_search_path)))
     else:
         return default
