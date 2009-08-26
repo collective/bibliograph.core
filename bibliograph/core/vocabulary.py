@@ -3,7 +3,7 @@
 # $Copy$
 ###############################################################################
 """ Vocabularies used by the bibliograph.* packages
-    
+
 $Id$
 """
 __docformat__ = 'reStructuredText'
@@ -35,5 +35,5 @@ class BibFormatVocabulary(object):
             (_("XML (MODS)"), 'xml'),
             (_("PDF"), 'pdf'),
         ])
-        
+
 BibFormatVocabularyFactory = BibFormatVocabulary()

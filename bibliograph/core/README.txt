@@ -23,7 +23,7 @@ containing single exportable IBibliographicReference objects.
 
   >>> 'IBibliographyExport' in dir(interfaces)
   True
-  
+
 Another part of the package are utility methods and a collection of encodings
 used within python and latex including a mapping.
 

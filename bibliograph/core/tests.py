@@ -18,7 +18,7 @@ class DummyEntry(object):
         return self.id
 
 class VocabularyTestCase(unittest.TestCase):
-    
+
     def setUp(self):
         provideUtility(BibFormatVocabularyFactory,
                        IVocabularyFactory,
@@ -38,12 +38,12 @@ def test_suite():
             package='bibliograph.core',
             setUp=testing.setUp,
             tearDown=testing.tearDown),
-            
+
         doctestunit.DocTestSuite(
             'bibliograph.core.utils',
             optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE,
             globs=dict(DummyEntry=DummyEntry)),
-        
+
         unittest.makeSuite(VocabularyTestCase),
         ])
 
