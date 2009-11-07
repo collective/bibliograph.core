@@ -71,10 +71,9 @@ def _getCommand(source_format, target_format, default=_marker):
     if command is None:
         raise ValueError, "No transformation from '%s' to '%s' found." \
               % (source_format, target_format)
-
     if not _hasCommands(command):
         if default is _marker:
-            raise LookupError, "Command %s not found." % command
+            raise LookupError("Command %s not found." % command)
         else:
             return default
     return command

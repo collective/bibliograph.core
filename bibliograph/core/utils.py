@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 ###############################################################################
 # $Copy$
 ###############################################################################
@@ -15,6 +15,10 @@ import os
 import re
 import string
 import sys
+import codecs
+
+# Zope imports
+from zope.schema.fieldproperty import FieldProperty
 
 # My imports ;-)
 from bibliograph.core.encodings import _utf8enc2latex_mapping
@@ -166,9 +170,11 @@ def _resolveEntities(text):
 
 def _resolveUnicode(text):
     for unichar in _utf8enc2latex_mapping.keys():
-        text = _encode(_decode(text).replace(unichar,
-                                             _utf8enc2latex_mapping[unichar]))
-    return _encode(_decode(text).replace(r'$}{$',''))
+        #text = _encode(_decode(text).replace(unichar,
+        #                                     _utf8enc2latex_mapping[unichar]))
+        text = text.replace(unichar, _utf8enc2latex_mapping[unichar])
+    #return _encode(_decode(text).replace(r'$}{$',''))
+    return text.replace(r'$}{$','')
 
 ###############################################################################
 
@@ -278,5 +284,51 @@ def bin_search(binary, default=_marker):
                            (binary, os.pathsep.join(bin_search_path)))
     else:
         return default
+
+
+_marker = []
+
+class FieldPropertyWithDefault(object):
+    """This sucks! Because of python's name mangling of double-leading-
+    underscore attributes, it's not possible to just subclass FieldProperty
+    here. The result is a series of AttributeErrors on
+    self._FieldPropertyWithDefault__name.
+    """
+
+    def __init__(self, field, name=None, default=_marker):
+        if name is None:
+            name = field.__name__
+        self._field = field
+        self._name = name
+        if default is not _marker:
+            self._default = default
+
+    def __get__(self, inst, klass):
+        if inst is None:
+            return self
+        value = inst.__dict__.get(self._name, _marker)
+        if value is _marker:
+            # Try to use the default set in the fieldproperty constructor
+            if hasattr(self, '_default'):
+                value = self._default
+                if callable(value):
+                    value = value()
+            else:
+                field = self._field.bind(inst)
+                value = getattr(field, 'default', _marker)
+                if value is _marker:
+                    raise AttributeError(self._name)
+            inst.__dict__[self._name] = value
+        return value
+
+    def __set__(self, inst, value):
+        field = self._field.bind(inst)
+        field.validate(value)
+        if field.readonly and inst.__dict__.has_key(self._name):
+            raise ValueError(self._name, 'field is readonly')
+        inst.__dict__[self._name] = value
+
+    def __getattr__(self, name):
+        return getattr(self._field, name)
 
 # EOF
