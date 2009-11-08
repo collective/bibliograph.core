@@ -214,7 +214,7 @@ class IBibliographicReference(Interface):
     """An object is renderable as a bibliography.
     """
 
-    id = schema.TextLine(
+    id = schema.ASCIILine(
         title=_('Id'),
         description=_('The id of the reference.'),
         required=True,
