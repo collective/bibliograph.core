@@ -152,7 +152,7 @@ class ArticleReference(BibliographicReference, Pages):
 
     implements(IArticleReference)
     portal_type = 'ArticleReference'
-    #publication_type = (_("Article"), 'article')
+    publication_type = 'article'
 
     journal = FieldProperty(IArticleReference['journal'])
     volume = FieldProperty(IArticleReference['volume'])
@@ -165,7 +165,7 @@ class BookReference(BibliographicReference, PublisherDetails, Volume):
 
     implements(IBookReference)
     portal_type = 'BookReference'
-    #publication_type = (_("Book"), 'book')
+    publication_type = 'book'
 
     edition = FieldProperty(IBookReference['edition'])
     series = FieldProperty(IBookReference['series'])
@@ -179,7 +179,7 @@ class BookletReference(BibliographicReference,
 
     implements(IBookletReference)
     portal_type = 'BookletReference'
-    #publication_type = (_("Booklet"), 'booklet')
+    publication_type = 'booklet'
 
 
 class ConferenceReference(BibliographicReference):
@@ -188,7 +188,7 @@ class ConferenceReference(BibliographicReference):
 
     implements(IConferenceReference)
     portal_type = 'ConferenceReference'
-    #publication_type = (_("Conference"), 'conference')
+    publication_type = 'conference'
 
     organization = FieldProperty(IConferenceReference['organization'])
 
@@ -199,7 +199,7 @@ class InbookReference(BibliographicReference, WithinVolume):
 
     implements(IInbookReference)
     portal_type = 'InbookReference'
-    #publication_type = (_("Inbook"), 'inbook')
+    publication_type = 'inbook'
 
 
 class IncollectionReference(BibliographicReference, WithinVolume):
@@ -208,7 +208,7 @@ class IncollectionReference(BibliographicReference, WithinVolume):
 
     implements(IIncollectionReference)
     portal_type = 'IncollectionReference'
-    #publication_type = (_("Incollection"), 'incollection')
+    publication_type = 'incollection'
 
 
 class InproceedingsReference(BibliographicReference, WithinVolume):
@@ -217,7 +217,7 @@ class InproceedingsReference(BibliographicReference, WithinVolume):
 
     implements(IInproceedingsReference)
     portal_type = 'InproceedingsReference'
-    #publication_type = (_("Inproceedings"), 'inproceenings')
+    publication_type = 'inproceenings'
 
 
 class ManualReference(BibliographicReference):
@@ -226,7 +226,7 @@ class ManualReference(BibliographicReference):
 
     implements(IManualReference)
     portal_type = 'ManualReference'
-    #publication_type = (_("Manual"), 'manual')
+    publication_type = 'manual'
 
 
 class MiscReference(BibliographicReference):
@@ -235,7 +235,7 @@ class MiscReference(BibliographicReference):
 
     implements(IMiscReference)
     portal_type = 'MiscReference'
-    #publication_type = (_("Misc"), 'misc')
+    publication_type = 'misc'
 
 
 class BaseUniversityReference(object):
@@ -251,7 +251,7 @@ class MasterthesisReference(BibliographicReference, BaseUniversityReference):
 
     implements(IMasterthesisReference)
     portal_type = 'MasterthesisReference'
-    #publication_type = (_("Masterthesis"), 'masterthesis')
+    publication_type = 'masterthesis'
 
 
 class PhdthesisReference(BibliographicReference, BaseUniversityReference):
@@ -260,7 +260,7 @@ class PhdthesisReference(BibliographicReference, BaseUniversityReference):
 
     implements(IPhdthesisReference)
     portal_type = 'PhdthesisReference'
-    #publication_type = (_("Phdthesis"), 'phdthesis')
+    publication_type = 'phdthesis'
 
 
 class ProceedingsReference(BibliographicReference, Volume):
@@ -269,7 +269,7 @@ class ProceedingsReference(BibliographicReference, Volume):
 
     implements(IProceedingsReference)
     portal_type = 'ProceedingsReference'
-    #publication_type = (_("Proceedings"), 'proceedings')
+    publication_type = 'proceedings'
 
 
 class TechreportReference(BibliographicReference):
@@ -278,7 +278,7 @@ class TechreportReference(BibliographicReference):
 
     implements(ITechreportReference)
     portal_type = 'TechreportReference'
-    #publication_type = (_("Techeport"), 'techreport')
+    publication_type = 'techreport'
 
 
 class UnpublishedReference(BibliographicReference):
@@ -287,7 +287,7 @@ class UnpublishedReference(BibliographicReference):
 
     implements(IUnpublishedReference)
     portal_type = 'UnpublishedReference'
-    #publication_type = (_("Unpublished"), 'unpublished')
+    publication_type = 'unpublished'
 
 
 class WebpublishedReference(BibliographicReference):
@@ -296,5 +296,5 @@ class WebpublishedReference(BibliographicReference):
 
     implements(IWebpublishedReference)
     portal_type = 'WebpublishedReference'
-    #publication_type = (_("Webpublished"), 'webpublished')
+    publication_type = 'webpublished'
 
