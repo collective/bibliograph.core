@@ -113,6 +113,11 @@ class IBibliographicReference(Interface):
         required=False,
         )
 
+    identifiers = schema.Dict(
+        title=_('Identifiers'),
+        required=False,
+        )
+
     def getAuthors(*args, **kw):
         """ Get a list-like object containing the authors.
             The object must know about rendering a formatted list
