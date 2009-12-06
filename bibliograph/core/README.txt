@@ -1,5 +1,5 @@
-bibliograph.core Package Readme
-===============================
+bibliograph.core
+================
 
 Overview
 --------
@@ -33,4 +33,10 @@ found in the PATH environment variable.
 
 You may overload the PATH environment variable with another environment
 variable: BIBUTILS_PATH. Executeables in this location will be found as well.
+
+Resources
+---------
+
+- Homepage: http://pypi.python.org/pypi/bibliograph.core
+- Code repository: http://svn.plone.org/svn/collective/bibliograph.core/
 
