@@ -40,3 +40,9 @@ Resources
 - Homepage: http://pypi.python.org/pypi/bibliograph.core
 - Code repository: http://svn.plone.org/svn/collective/bibliograph.core/
 
+Contributors
+------------
+
+- Tom Gross, itconsense@gmail.com, Author
+- Raphael Ritz, r.ritz@biologie.hu-berlin.de, Renderers
+- Andreas Jung, info@zopyx.com, bugfixes
