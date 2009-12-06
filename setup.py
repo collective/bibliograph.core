@@ -11,25 +11,13 @@ def read(*rnames):
 version = '0.2.3'
 
 long_description = (
-    read('README.txt')
-    + '\n' +
-    'Change history\n'
-    '**************\n'
-    + '\n' +
-    read('CHANGES.txt')
-    + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
     read('bibliograph', 'core', 'README.txt')
     + '\n' +
-    'Contributors\n'
-    '************\n'
+    'Change history\n'
+    '--------------\n'
     + '\n' +
-    read('CONTRIBUTORS.txt')
-    + '\n' +
-    'Download\n'
-    '********\n'
+    read('CHANGES.txt')
+    + '\n' 
     )
 
 entry_points="""

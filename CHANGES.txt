@@ -22,7 +22,7 @@
 - Updated encodings.py so that accented characters are correctly rendered for BibTeX/LaTeX [tim2p].
 - Removed IBibContainerIterator in favour of rolling the functionality into a (new) IBibliography interface [tim2p].
 - Added an (unused, currently) IAuthors interface that I plan to develop into a part of the author handling api [tim2p].
- - Introduced generic vocabulary `bibliography.formats` for IBibliographyExport interface [tom_gross].
+- Introduced generic vocabulary `bibliography.formats` for IBibliographyExport interface [tom_gross].
 
 0.1.0 (2008-05-02)
 ==================
