@@ -1,7 +1,7 @@
 0.2.3 (2009-12-06)
 ==================
 
-- replace unicode -> TeX mapping (encodings.py) with a more complete
+- replaced unicode -> TeX mapping (encodings.py) with a more complete
   mapping as found in docutils.py (unicode_map.py)
 
 0.2.2 (2009-12-04)
