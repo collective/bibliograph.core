@@ -1,3 +1,8 @@
+0.2.4 (unreleased)
+==================
+
+- added publication_month to IBibliographicReference
+
 0.2.3 (2009-12-06)
 ==================
 
