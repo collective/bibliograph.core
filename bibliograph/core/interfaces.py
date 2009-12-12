@@ -78,6 +78,12 @@ class IBibliographicReference(Interface):
         required=True,
         )
 
+    publication_month = schema.TextLine(
+        title=_('Month of publication'),
+        required=False,
+        )
+
+
     abstract = schema.Text(
         title=_('Abstract'),
         description=_('A short summary of the document'),
