@@ -1,3 +1,9 @@
+0.2.5 (unreleased)
+==================
+
+- IBibliographicReference: 'year' is now a TextLine field because
+  an 'Int' is to restrictive
+
 0.2.4 (2009-12-12)
 ==================
 

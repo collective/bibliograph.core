@@ -73,7 +73,7 @@ class IBibliographicReference(Interface):
         required = False,
         )
 
-    publication_year = schema.Int(
+    publication_year = schema.TextLine(
         title=_('Year of publication'),
         required=True,
         )
