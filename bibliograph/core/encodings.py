@@ -64,7 +64,7 @@ _python_encodings = (
     'iso8859-9',
     'koi8-r',
     'koi8-u',
-    'latin-1',
+    'iso-8859-15',
     'mac-cyrillic',
     'mac-greek',
     'mac-iceland',
