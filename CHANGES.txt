@@ -1,3 +1,7 @@
+0.2.7 (2010-01-22)
+==================
+- adjust parameters for Endnote conversion
+ 
 0.2.6 (2010-01-22)
 ==================
 - calling ris2bib  converter with explicit UTF-8 input encoding 
