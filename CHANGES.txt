@@ -1,3 +1,8 @@
+0.2.6 (2010-01-22)
+==================
+- calling ris2bib  converter with explicit UTF-8 input encoding 
+  (checked and enforced within bibliograph.parsing)
+
 0.2.5 (2009-12-15)
 ==================
 
