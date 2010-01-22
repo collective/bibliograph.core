@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.2.6'
+version = '0.2.6.1'
 
 long_description = (
     read('bibliograph', 'core', 'README.txt')
@@ -33,6 +33,7 @@ setup(name='bibliograph.core',
         "Framework :: Zope2",
         "Framework :: Zope3",
         "Programming Language :: Python",
+        "Development Status :: 5 - Production/Stable",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "License :: OSI Approved :: Zope Public License",
         ],
