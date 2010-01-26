@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.2.7'
+version = '0.2.7.1'
 
 long_description = (
     read('bibliograph', 'core', 'README.txt')
@@ -17,7 +17,7 @@ long_description = (
     '--------------\n'
     + '\n' +
     read('CHANGES.txt')
-    + '\n' 
+    + '\n'
     )
 
 entry_points="""

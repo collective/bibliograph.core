@@ -1,3 +1,7 @@
+0.2.7.1 (2010-01-26)
+====================
+- minor tweak to ris2bib parameters
+
 0.2.7 (2010-01-22)
 ==================
 - adjust parameters for Endnote conversion
