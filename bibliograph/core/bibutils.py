@@ -15,7 +15,7 @@ from bibliograph.core.utils import bin_search
 
 log = logging.getLogger('bibliograph.core')
 
-commands = {'bib2xml':'bib2xml',
+commands = {'bib2xml':'bib2xml -un',
             'copac2xml':'copac2xml',
             'end2xml':'end2xml',
             'isi2xml':'isi2xml',
