@@ -1,3 +1,8 @@
+1.0.0b1 (2010-01-28)
+====================
+- new numbering schema
+- various encoding parameter fixes
+
 0.2.7.1 (2010-01-26)
 ====================
 - minor tweak to ris2bib parameters
