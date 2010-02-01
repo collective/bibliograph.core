@@ -1,5 +1,5 @@
-1.0.0b3 (unrelased)
-===================
+1.0.0b3 (2010-02-01)
+====================
 - fixed cmdline parameters for ris2bib transformation 
 
 1.0.0b2 (2010-01-31)
