@@ -5,7 +5,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 from bibliograph.core.encodings import _python_encodings
 
-# XXX as long as we don't have a propper translation messagefactory
+# XXX as long as we don't have a proper translation messagefactory
 _ = unicode
 
 ###############################################################################
