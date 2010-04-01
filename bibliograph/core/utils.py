@@ -279,4 +279,3 @@ def bin_search(binary, default=_marker):
     else:
         return default
 
-# EOF
