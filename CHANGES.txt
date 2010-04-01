@@ -1,3 +1,7 @@
+1.0.1 (2010-04-01)
+==================
+* added version_check API for checking the install Bibutils version
+
 1.0.0 (2010-03-19)
 ==================
 * final release
