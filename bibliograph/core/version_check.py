@@ -27,6 +27,3 @@ def checkBibutilsVersion(min_version=4.6):
 
     raise RuntimeError('Unable to determine Bibtutils version')
 
-
-
-
