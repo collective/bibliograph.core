@@ -1,3 +1,7 @@
+1.0.2 (2010-07-23)
+==================
+* removed \mbox from \texteuro in unicode -> tex conversion table
+
 1.0.1 (2010-04-01)
 ==================
 * added version_check API for checking the install Bibutils version
