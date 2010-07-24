@@ -1,3 +1,7 @@
+1.0.3 (2010-07-24)
+==================
+* fixed output encoding for xml2bib conversion settings
+
 1.0.2 (2010-07-23)
 ==================
 * removed \mbox from \texteuro in unicode -> tex conversion table
