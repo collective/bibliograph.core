@@ -95,9 +95,9 @@ def _decode(s, encoding=_default_encoding):
 
 ###############################################################################
 
-VALIDIDPAT = re.compile('[ "@\',\\#}{~%&$^]')
+VALIDIDPAT = re.compile('[ "@\',\\#}{~%&$^\._]')
 
-def _validKey(entry):
+def _validKey(entry, replacechar=''):
     """
     uses the Zope object id but
     removes characters not allowed in BibTeX keys
@@ -117,7 +117,7 @@ def _validKey(entry):
 
     # This substitution is based on the description of cite key restrictions at
     # http://bibdesk.sourceforge.net/manual/BibDesk%20Help_2.html
-    return VALIDIDPAT.sub('', raw_id)
+    return VALIDIDPAT.sub(replacechar, raw_id)
 
 ###############################################################################
 
