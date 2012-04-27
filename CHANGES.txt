@@ -1,4 +1,4 @@
-0.2.1_FHNW2 (unreleased)
+0.2.1_FHNW2 (unreleased )
 ========================
 
 - Nothing changed yet.
