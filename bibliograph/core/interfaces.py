@@ -33,6 +33,13 @@ class IBibliographyExport(Interface):
 class IBibliographicReference(Interface):
     """ An object is renderable as a bibliography """
 
+    #Used by _validKey
+    getId = schema.TextLine(
+        title=_('getId'),
+        description=_('The id of the document'),
+        required = True,
+        )
+    
     title = schema.TextLine(
         title=_('Title'),
         description=_('The title of the document'),
@@ -45,6 +52,8 @@ class IBibliographicReference(Interface):
         required = True,
         )
 
+    #authorurls?
+
     publication_type = schema.Choice(
         title=_('Publication type'),
         description=_('A publication type as found in the bibtex definition'),
@@ -56,7 +65,7 @@ class IBibliographicReference(Interface):
             (_("Conference"), 'conference'),
             (_("Inbook"), 'inbook'),
             (_("Incollection"), 'incollection'),
-            (_("Inproceedings"), 'inproceenings'),
+            (_("Inproceedings"), 'inproceedings'),
             (_("Manual"), 'manual'),
             (_("Masterthesis"), 'masterthesis'),
             (_("Misc"), 'misc'),
