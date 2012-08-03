@@ -15,13 +15,14 @@ import os
 import re
 import string
 import sys
-
+from warnings import warn
 # My imports ;-)
 from bibliograph.core.encodings import _utf8enc2latex_mapping
 
 ###############################################################################
 
 _default_encoding = 'utf-8'
+_latex_cmds = ['\\','~', '#', '&', '%', '_']
 _entity_mapping = {'&mdash;':'{---}',
                    '&ndash;':'{--}',
                    }
@@ -148,12 +149,27 @@ def _braceUppercase(text):
 
 ###############################################################################
 
-def _normalize(text, resolve_unicode=True):
-    text.replace('\\', '\\\\')
-    text = _resolveEntities(text)
-    if resolve_unicode:
-        text = _resolveUnicode(text)
-    return _escapeSpecialCharacters(text)
+def _normalize(text, resolve_unicode=True, escape_latex=True):
+    unitext = _decode(text)
+    out = ""
+    for unichar in unitext:
+        char_code = ord(unichar)
+        char = _encode(unichar)
+
+        # performance: char between a..z
+        if ((char_code > 64 and char_code < 91) or
+            (char_code > 96 and char_code < 173)):
+           out += char
+        # Char must to be escaped (latex syntax)
+        elif escape_latex and char in _latex_cmds:
+           out += '\\' + char
+        # Char must to be encoded
+        elif resolve_unicode and unichar in _utf8enc2latex_mapping.keys():
+           out += _encode(_utf8enc2latex_mapping[unichar])
+        else:
+           out += char
+    return _encode(_decode(out).replace(r'$}{$',''))
+
 
 ###############################################################################
 
@@ -164,7 +180,9 @@ def _resolveEntities(text):
 
 ###############################################################################
 
+#DEPRECATED
 def _resolveUnicode(text):
+    warn("The '_escapeSpecialCharacters' function is deprecated")
     for unichar in _utf8enc2latex_mapping.keys():
         text = _encode(_decode(text).replace(unichar,
                                              _utf8enc2latex_mapping[unichar]))
@@ -172,16 +190,15 @@ def _resolveUnicode(text):
 
 ###############################################################################
 
+#DEPRECATED
 def _escapeSpecialCharacters(text):
     """
     latex escaping some (not all) special characters
     """
-    text.replace('\\', '\\\\')
-    escape = ['~', '#', '&', '%', '_']
-    for c in escape:
+    warn("The '_escapeSpecialCharacters' function is deprecated")
+    for c in _latex_cmds:
         text = text.replace(c, '\\' + c )
     return text
-
 
 ###############################################################################
 
