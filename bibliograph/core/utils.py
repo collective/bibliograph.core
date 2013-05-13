@@ -23,6 +23,7 @@ from bibliograph.core.encodings import _utf8enc2latex_mapping
 
 _default_encoding = 'utf-8'
 _latex_cmds = ['\\','~', '#', '&', '%', '_']
+_latex_cmds_long = ['\\url',]
 _entity_mapping = {'&mdash;':'{---}',
                    '&ndash;':'{--}',
                    }
@@ -148,11 +149,21 @@ def _braceUppercase(text):
     return text
 
 ###############################################################################
-
 def _normalize(text, resolve_unicode=True, escape_latex=True):
+
+    def is_command_word(unitext, charpos):
+        """ Verify if it is a bibtex command (word).
+        """
+        cmd_fund=False
+        for cmd in  _latex_cmds_word:
+            if unitext[charpos:].startswith(cmd):
+                return cmd
+
     unitext = _decode(text)
     out = ""
-    for unichar in unitext:
+    charpos = 0
+    while charpos < len(unitext):
+        unichar = unitext[charpos]
         char_code = ord(unichar)
         char = _encode(unichar)
 
@@ -162,14 +173,23 @@ def _normalize(text, resolve_unicode=True, escape_latex=True):
            out += char
         # Char must to be escaped (latex syntax)
         elif escape_latex and char in _latex_cmds:
-           out += '\\' + char
+            # check if it's a command (word), like: \url
+            cmd_word = is_command_word(unitext, charpos)
+            if cmd_word:
+                # do not escape
+                print "ignored cmd from escape:",cmd_word
+                out += cmd_word
+                charpos += len(cmd_word)-1
+            else:
+                # escape char
+                out += '\\' + char
         # Char must to be encoded
         elif resolve_unicode and unichar in _utf8enc2latex_mapping.keys():
            out += _encode(_utf8enc2latex_mapping[unichar])
         else:
            out += char
+        charpos += 1
     return _encode(_decode(out).replace(r'$}{$',''))
-
 
 ###############################################################################
 
