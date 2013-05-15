@@ -176,8 +176,7 @@ def _normalize(text, resolve_unicode=True, escape_latex=True):
             # check if it's a command (word), like: \url
             cmd_word = is_command_word(unitext, charpos)
             if cmd_word:
-                # do not escape
-                print "ignored cmd from escape:",cmd_word
+                # do not escape them
                 out += cmd_word
                 charpos += len(cmd_word)-1
             else:
