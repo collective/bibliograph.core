@@ -23,7 +23,7 @@ from bibliograph.core.encodings import _utf8enc2latex_mapping
 
 _default_encoding = 'utf-8'
 _latex_cmds = ['\\','~', '#', '&', '%', '_']
-_latex_cmds_long = ['\\url',]
+_latex_cmds_word = ['\\url',]
 _entity_mapping = {'&mdash;':'{---}',
                    '&ndash;':'{--}',
                    }
