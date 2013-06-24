@@ -1,3 +1,11 @@
+1.0.3-FHNW2 (unreleased)
+========================
+* accept the latex command "\url" 
+
+1.0.3-FHNW1 (2012-08-6)
+=======================
+* escape latex commands in "_normalize"
+
 1.0.3 (2010-07-24)
 ==================
 * fixed output encoding for xml2bib conversion settings
