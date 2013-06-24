@@ -1,0 +1,3 @@
+recursive-include bibliograph *
+include *.txt
+global-exclude *.pyc
