@@ -1,4 +1,4 @@
-1.0.3-FHNW2 (unreleased)
+1.0.3-FHNW2 (2013-06-24)
 ========================
 * accept the latex command "\url" 
 
