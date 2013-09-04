@@ -1,8 +1,6 @@
 bibliograph.core
 ================
 
-.. contents::
-
 Overview
 --------
 
