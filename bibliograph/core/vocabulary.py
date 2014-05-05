@@ -13,7 +13,7 @@ __author__  = 'Tom Gross <itconsense@gmail.com>'
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary
 
-from zope.app.schema.vocabulary import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 
 # XXX as long as we don't have a propper translation messagefactory
 _ = unicode
