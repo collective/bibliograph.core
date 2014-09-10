@@ -1,3 +1,8 @@
+1.0.4 (unreleased)
+==================
+* fixed tests
+* fixed issue in the version_check API, added tests to cover the fix.
+
 1.0.3 (2010-07-24)
 ==================
 * fixed output encoding for xml2bib conversion settings
