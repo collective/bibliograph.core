@@ -29,6 +29,30 @@ class VocabularyTestCase(unittest.TestCase):
         assert 'bibtex' in voc
 
 
+class VersionCheckTestCase(unittest.TestCase):
+
+    def _call_FUT(self, bibutils_version):
+        from bibliograph.core.version_check import checkBibutilsVersion
+        return checkBibutilsVersion(bibutils_version=bibutils_version)
+
+    def test_lower_numeric_versions(self):
+        """assert that numeric versions less than the minimum are rejected"""
+        versions = ['3.0', '3.12', '4.1']
+        for version in versions:
+            self.assertRaises(RuntimeError, self._call_FUT, version)
+
+    def test_higher_numeric_versions(self):
+        versions = ['4.12', '5.1', '5.12']
+        for version in versions:
+            self.assertEqual(self._call_FUT(version), version)
+
+    def test_no_bibutils_version(self):
+        self.assertRaises(RuntimeError, self._call_FUT, None)
+
+    def test_invalid_version(self):
+        self.assertRaises(RuntimeError, self._call_FUT, 'iamnotaversion')
+
+
 def test_suite():
     return unittest.TestSuite([
 
@@ -41,7 +65,9 @@ def test_suite():
             'bibliograph.core.bibutils',
             optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE),
         unittest.makeSuite(VocabularyTestCase),
+        unittest.makeSuite(VersionCheckTestCase),
         ])
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')
