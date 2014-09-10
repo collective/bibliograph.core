@@ -5,7 +5,7 @@ from zope.component import testing
 from zope.component import provideUtility
 from zope.component import getUtility
 
-from zope.app.schema.vocabulary import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 
 from bibliograph.core.vocabulary import BibFormatVocabularyFactory
 
@@ -32,18 +32,14 @@ class VocabularyTestCase(unittest.TestCase):
 def test_suite():
     return unittest.TestSuite([
 
-        # Unit tests for your API
-        doctestunit.DocFileSuite(
-            'README.txt',
-            package='bibliograph.core',
-            setUp=testing.setUp,
-            tearDown=testing.tearDown),
-
+        # Gather doctests from package files
         doctestunit.DocTestSuite(
             'bibliograph.core.utils',
             optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE,
             globs=dict(DummyEntry=DummyEntry)),
-
+        doctestunit.DocTestSuite(
+            'bibliograph.core.bibutils',
+            optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE),
         unittest.makeSuite(VocabularyTestCase),
         ])
 
