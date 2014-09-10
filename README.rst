@@ -39,6 +39,21 @@ found in the PATH environment variable.
 You may overload the PATH environment variable with another environment
 variable: BIBUTILS_PATH. Executeables in this location will be found as well.
 
+Tests
+-----
+
+This package has tests.  They may be run as follows:
+
+    $ python setup.py test
+
+The package has install dependencies and test dependencies.  It is recommended
+that you run the tests in an isolated Python environment, such as that provided
+by `buildout <http://www.buildout.org>`_ or
+`virtualenv <https://virtualenv.pypa.io>`_.
+
+Before committing changes to this package, please add a test and run the test
+suite.
+
 Resources
 ---------
 
