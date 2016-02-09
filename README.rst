@@ -4,28 +4,33 @@ bibliograph.core
 Overview
 --------
 
-Core definitions of bibliograph packages
+This package defines common elements used by the packages sharing the
+`bibliograph` namespace:
 
-Here all bits and pieces are defined which are commonly used by the
-packagages sharing the `bibliograph` namespace. We provide some interfaces
-here:
+* `bibliograph.parsing <https://github.com/collective/bibliograph.parsing/>`_
+* `bibliograph.rendering <https://github.com/collective/bibliograph.rendering/>`_
 
-IBibliographicReference is an interface for a single content object with a given
-schema which can be rendered as a bibliographic entry (bibtex, endnote,
-ris, etc.)::
+A few interfaces are defined:
 
-    >>> from bibliograph.core import interfaces
-    >>> 'IBibliographicReference' in dir(interfaces)
-    True
+IBibliographicReference
+  an interface for a single content object with a given schema which can be
+  rendered as a bibliographic entry (bibtex, endnote, ris, etc.)
 
-IBibliographyExport is a marker for a container directly containing single
-exportable IBibliographicReference objects::
+IBibliographyExport
+  is a marker for a container directly containing single exportable
+  IBibliographicReference objects
 
-    >>> 'IBibliographyExport' in dir(interfaces)
-    True
+IAuthor
+  an interface for a single content object with a given schema which represents
+  the author (or possibly the editor) of a bibliographic work
 
-Another part of the package are utility methods and a collection of encodings
-used within python and latex including a mapping.
+IBibliography
+  An interface for containers which contain IBibliographicReference objects
+
+
+This package also provides utility methods and a collection of encodings used
+within python and latex.  A mapping of utf8 characters to equivalent latex
+entities is also included.
 
 A utility method `bin_search` is included. It acts like the `which`-command on
 posix systems. It returns the full path of an executeable command, if it is
@@ -33,6 +38,21 @@ found in the PATH environment variable.
 
 You may overload the PATH environment variable with another environment
 variable: BIBUTILS_PATH. Executeables in this location will be found as well.
+
+Tests
+-----
+
+This package has tests.  They may be run as follows:
+
+    $ python setup.py test
+
+The package has install dependencies and test dependencies.  It is recommended
+that you run the tests in an isolated Python environment, such as that provided
+by `buildout <http://www.buildout.org>`_ or
+`virtualenv <https://virtualenv.pypa.io>`_.
+
+Before committing changes to this package, please add a test and run the test
+suite.
 
 Resources
 ---------

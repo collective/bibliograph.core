@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.0.3'
+version = '1.0.4'
 
 long_description = (
     read('README.rst')
@@ -46,7 +46,12 @@ setup(name='bibliograph.core',
       namespace_packages=['bibliograph'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['setuptools'],
-      tests_require=['zope.testing'],
+      install_requires=[
+        'setuptools',
+        'zope.interface',
+        'zope.schema',
+      ],
+      tests_require=['zope.testing', 'zope.component'],
+      test_suite='bibliograph.core.tests.test_suite',
       entry_points=entry_points,
       )
