@@ -5,7 +5,7 @@ from zope.component import testing
 from zope.component import provideUtility
 from zope.component import getUtility
 
-from zope.app.schema.vocabulary import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 
 from bibliograph.core.vocabulary import BibFormatVocabularyFactory
 
