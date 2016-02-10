@@ -103,6 +103,7 @@ def _validKey(entry):
     removes characters not allowed in BibTeX keys
 
     >>> from bibliograph.core.utils import _validKey
+    >>> from bibliograph.core.tests import DummyEntry
     >>> _validKey(DummyEntry('Foo Bar'))
     'FooBar'
 
@@ -225,7 +226,7 @@ def bin_search(binary, default=_marker):
         >>> bin_search('python') != ''
         True
 
-        >>> bin_search('a_completely_stupid_command')
+        >>> bin_search('a_completely_stupid_command')  # doctest: +ELLIPSIS
         Traceback (most recent call last):
         ...
         MissingBinary: Unable to find binary "a_completely_stupid_command" ...
