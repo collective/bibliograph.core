@@ -63,6 +63,6 @@ setup(name='bibliograph.core',
       zip_safe=False,
       install_requires=dependencies,
       extras_require=extras,
-      tests_require=['regex', 'zope.testing<4.2', 'zope.component'],
+      tests_require=['pretext>=0.0.4', 'regex', 'zope.testing<4.2', 'zope.component'],
       entry_points=entry_points,
       )
