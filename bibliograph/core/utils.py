@@ -16,6 +16,8 @@ import re
 import string
 import sys
 
+from warnings import warn
+
 # My imports ;-)
 from bibliograph.core.encodings import _utf8enc2latex_mapping
 
@@ -140,9 +142,33 @@ def _braceUppercase(text):
         >>> _braceUppercase('foo bar')
         'foo bar'
 
+        >>> _braceUppercase('foo BAr')
+        'foo {BAr}'
+
+        >>> _braceUppercase('foo bAAr')
+        'foo b{AA}r'
+
         >>> _braceUppercase('Foo Bar')
-        '{F}oo {B}ar'
+        '{Foo} {Bar}'
+
+        >> _braceUppercase(u'Языки Евразии')
+        '{Языки} {Евразии}'
+
     """
+    try:
+        import regex
+    except ImportError:
+        warn('regex module not found. '
+             'Word uppercase bracing and Unicode uppercase not supported',
+             UnicodeWarning)
+        regex = None
+
+    if regex:
+        return regex.sub(r'(\b[[:upper:]]+[^\s]*|[[:upper:]]+)',
+                         lambda m: r'{%s}' % m.group(0),
+                         text,
+                         flags=regex.UNICODE)
+
     for uc in string.uppercase:
         text = text.replace(uc, r'{%s}' % uc)
     return text
