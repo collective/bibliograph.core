@@ -46,7 +46,11 @@ setup(name='bibliograph.core',
       namespace_packages=['bibliograph'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['setuptools'],
-      tests_require=['zope.testing'],
+      install_requires=[
+          'setuptools',
+          'zope.interface',
+          'zope.schema',
+      ],
+      tests_require=['zope.testing<4.2', 'zope.component'],
       entry_points=entry_points,
       )
