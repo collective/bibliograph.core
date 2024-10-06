@@ -9,22 +9,26 @@ $Id$
 __docformat__ = 'reStructuredText'
 __author__  = 'Tom Gross <itconsense@gmail.com>'
 
+import sys
+
 # Zope imports
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.vocabulary import SimpleVocabulary
 
 from zope.schema.interfaces import IVocabularyFactory
 
 # XXX as long as we don't have a propper translation messagefactory
-_ = unicode
+if sys.version_info[0] == 2:
+    _ = unicode
+else:
+    _ = str
 
 ###############################################################################
 
+@implementer(IVocabularyFactory)
 class BibFormatVocabulary(object):
     """ A vocabulary for bibliographic formats
     """
-
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """ A simple constant vocabulary """

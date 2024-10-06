@@ -21,6 +21,10 @@ from warnings import warn
 # My imports ;-)
 from bibliograph.core.encodings import _utf8enc2latex_mapping
 
+PY2 = sys.version_info[0] == 2
+if not PY2:
+    unicode = str
+
 ###############################################################################
 
 _default_encoding = 'utf-8'
@@ -32,25 +36,26 @@ _entity_mapping = {'&mdash;':'{---}',
 # a poor-mans approach to fixing unicode issues :-(
 
 def _encode(s, encoding=_default_encoding):
-    ur""" Try to encode a string
+    u""" Try to encode a string
 
+        >>> import pretext; pretext.activate()
         >>> from bibliograph.core.utils import _encode
 
         ASCII is ASCII is ASCII ...
         >>> _encode(u'ascii', 'utf-8')
-        'ascii'
+        b'ascii'
 
         This is normal
         >>> _encode(u'öl', 'utf-8')
-        '\xc3\xb6l'
+        b'\\xc3\\xb6l'
 
         Don't fail on this ...
         >>> _encode('öl', 'utf-8')
-        '\xc3\xb6l'
+        b'\\xc3\\xb6l'
 
         Don't fail on this also
         >>> _encode(None, 'utf-8')
-        ''
+        b''
 
         Still throw an exception on unknown encodings
         >>> _encode(u'öl', 'bogus')
@@ -60,31 +65,38 @@ def _encode(s, encoding=_default_encoding):
 
     """
     if not s:
-        return ''
+        if PY2:
+            return bytes('')
+        else:
+            return bytes('', encoding)
     try:
         return s.encode(encoding)
     except (TypeError, UnicodeDecodeError, ValueError):
-        return s
+        if PY2:
+            return bytes(s)
+        else:
+            return bytes(s, encoding)
 
 def _decode(s, encoding=_default_encoding):
-    ur""" Try to decode a string
+    u""" Try to decode a string
 
+        >>> import pretext; pretext.activate()
         >>> from bibliograph.core.utils import _decode
 
         ASCII is ASCII is ASCII ...
-        >>> _decode('ascii', 'utf-8')
-        u'ascii'
+        >>> _decode(b'ascii', 'utf-8')
+        'ascii'
 
         This is normal
-        >>> _decode('öl', 'utf-8')
-        u'\xf6l'
+        >>> _decode(b'\\xc3\\xb6l', 'utf-8')
+        '\\xf6l'
 
         Don't fail on this ...
         >>> _decode(u'öl', 'utf-8')
-        u'\xf6l'
+        '\\xf6l'
 
         Still throw an exception on unknown encodings
-        >>> _decode('öl', 'bogus')
+        >>> _decode(b'\\xc3\\xb6l', 'bogus')
         Traceback (most recent call last):
         ...
         LookupError: unknown encoding: bogus
@@ -138,17 +150,18 @@ def AuthorURLs(entry):
 def _braceUppercase(text):
     """ Convert uppercase letters to bibtex encoded uppercase
 
+        >>> import pretext; pretext.activate()
         >>> from bibliograph.core.utils import _braceUppercase
-        >>> _braceUppercase('foo bar')
+        >>> _braceUppercase(u'foo bar')
         'foo bar'
 
-        >>> _braceUppercase('foo BAr')
+        >>> _braceUppercase(u'foo BAr')
         'foo {BAr}'
 
-        >>> _braceUppercase('foo bAAr')
+        >>> _braceUppercase(u'foo bAAr')
         'foo b{AA}r'
 
-        >>> _braceUppercase('Foo Bar')
+        >>> _braceUppercase(u'Foo Bar')
         '{Foo} {Bar}'
 
         >> _braceUppercase(u'Языки Евразии')
@@ -248,16 +261,19 @@ def bin_search(binary, default=_marker):
 
         We assume we have a python(.exe) installed anywhere in
         the path. This seems one of the safest test.
+
+        >>> import pretext; pretext.activate()
         >>> from bibliograph.core.utils import bin_search
         >>> bin_search('python') != ''
         True
 
-        >>> bin_search('a_completely_stupid_command')  # doctest: +ELLIPSIS
+        >>> bin_search('a_completely_stupid_command')
+        ... # doctest: +ELLIPSIS, +IGNORE_EXCEPTION_DETAIL
         Traceback (most recent call last):
         ...
         MissingBinary: Unable to find binary "a_completely_stupid_command" ...
 
-        >>> bin_search('a_completely_stupid_command', '/bin/default')
+        >>> bin_search(u'a_completely_stupid_command', u'/bin/default')
         '/bin/default'
 
         Let's see if the additional path is searched.
@@ -270,7 +286,7 @@ def bin_search(binary, default=_marker):
         Now create a dummy executable we want to find.
         >>> exe = os.path.join(dir, '_stub_testing_file')
         >>> f = open(exe, 'w')
-        >>> f.write('foobar')
+        >>> _ = f.write('foobar')
         >>> f.close()
         >>> os.chmod(exe, stat.S_IXUSR | stat.S_IRUSR)
 

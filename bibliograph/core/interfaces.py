@@ -1,3 +1,5 @@
+import sys
+
 from zope.interface import Interface
 from zope.interface.common.mapping import IIterableMapping
 from zope import schema
@@ -6,7 +8,10 @@ from zope.schema.vocabulary import SimpleVocabulary
 from bibliograph.core.encodings import _python_encodings
 
 # XXX as long as we don't have a proper translation messagefactory
-_ = unicode
+if sys.version_info[0] == 2:
+    _ = unicode
+else:
+    _ = str
 
 ###############################################################################
 
