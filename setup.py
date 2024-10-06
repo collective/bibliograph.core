@@ -3,6 +3,8 @@
 This module contains the core definitions of the bibliograph packages
 """
 import os
+import sys
+
 from setuptools import setup, find_packages
 
 def read(*rnames):
@@ -23,6 +25,19 @@ long_description = (
 entry_points="""
 # -*- Entry points: -*-
 """
+
+dependencies = [
+    'setuptools',
+    'zope.interface',
+    'zope.schema',
+]
+
+extras = {
+    'unicode': 'regex',
+}
+
+if sys.version_info[0] > 2:
+    dependencies.append('regex')
 
 setup(name='bibliograph.core',
       version=version,
@@ -46,11 +61,8 @@ setup(name='bibliograph.core',
       namespace_packages=['bibliograph'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          'setuptools',
-          'zope.interface',
-          'zope.schema',
-      ],
-      tests_require=['zope.testing<4.2', 'zope.component'],
+      install_requires=dependencies,
+      extras_require=extras,
+      tests_require=['regex', 'zope.testing<4.2', 'zope.component'],
       entry_points=entry_points,
       )
